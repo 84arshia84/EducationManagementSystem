@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ApplicationService.Dtos.Courses
+{
+    public class CourseReadDto
+    {
+        public Guid Id { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public DateTime CreatedAt { get; set; }
+
+        // روابط خلاصه
+        public List<string>? MentorNames { get; set; }
+        public List<string>? StudentNames { get; set; }
+    }
+}

@@ -1,0 +1,42 @@
+﻿using AppCore.Entities.Courses;
+using ApplicationService.Dtos.Courses;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ApplicationService.Mappers.Courses
+{
+    public static class CourseMapper
+    {
+        public static CourseReadDto ToDto(Course course)
+        {
+            return new CourseReadDto
+            {
+                Id = course.Id,
+                Title = course.Title, 
+                CreatedAt = course.CreatedAt,
+                MentorNames = course.MentorCourses?
+                    .Select(mc => $"{mc.MentorProfile.User.FirstName} {mc.MentorProfile.User.LastName}")
+                    .ToList(),
+                StudentNames = course.StudentCourses?
+                    .Select(sc => $"{sc.StudentProfile.User.FirstName} {sc.StudentProfile.User.LastName}")
+                    .ToList()
+            };
+        }
+
+        public static Course ToEntity(CreateCourseDto dto)
+        {
+            return new Course
+            {
+                Title = dto.Title,
+            };
+        }
+
+        public static void UpdateEntity(Course course, UpdateCourseDto dto)
+        {
+            course.Title = dto.Title;
+        }
+    }
+}
