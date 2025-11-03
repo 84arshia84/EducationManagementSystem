@@ -1,5 +1,6 @@
 ﻿using AppCore.UnitOfWork;
 using ApplicationService.Dtos.Classroom;
+using ApplicationService.Mappers.Classrooms;
 using ApplicationService.ServicesContract.Classroom;
 using System;
 using System.Collections.Generic;
@@ -12,34 +13,46 @@ namespace ApplicationService.Services.Classroom
     public class ClassroomService : IClassroomService
     {
         private readonly IUnitOfWork _uow;
-        public ClassroomService (IUnitOfWork uow)
+        public ClassroomService(IUnitOfWork uow)
         {
             _uow = uow;
         }
 
-        public async Task<ClassroomDto> CreateAsync(CreateClassroomDto dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task DeleteAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<ClassroomDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var classrooms = await _uow.Classrooms.GetAllAsync();
+            return classrooms.Select(ClassroomMapper.ToDto);
         }
 
         public async Task<ClassroomDto?> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var classroom = await _uow.Classrooms.GetByIdAsync(id);
+            return classroom == null ? null : ClassroomMapper.ToDto(classroom);
+        }
+
+        public async Task<ClassroomDto> CreateAsync(CreateClassroomDto dto)
+        {
+            var entity = ClassroomMapper.ToEntity(dto);
+            await _uow.Classrooms.AddAsync(entity);
+            await _uow.SaveChangesAsync();
+            return ClassroomMapper.ToDto(entity);
         }
 
         public async Task UpdateAsync(Guid id, UpdateClassroomDto dto)
         {
-            throw new NotImplementedException();
+            var existing = await _uow.Classrooms.GetByIdAsync(id);
+            if (existing == null) return;
+
+            ClassroomMapper.UpdateEntity(existing, dto);
+            await _uow.Classrooms.UpdateAsync(existing, id);
+            await _uow.SaveChangesAsync();
         }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            await _uow.Classrooms.DeleteAsync(id);
+            await _uow.SaveChangesAsync();
+        }
+
     }
 }

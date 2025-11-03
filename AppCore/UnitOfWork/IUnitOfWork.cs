@@ -1,4 +1,6 @@
-﻿using AppCore.Entities.Courses;
+﻿using AppCore.Entities.Classroom;
+using AppCore.Entities.ClassroomMember;
+using AppCore.Entities.Courses;
 using AppCore.Entities.MentorProfiles;
 using AppCore.Entities.StudentProfiles;
 using AppCore.Entities.Users;
@@ -16,6 +18,8 @@ namespace AppCore.UnitOfWork
         ICourseRepository Courses { get; }
         IStudentProfileRepository Students { get; }
         IMentorProfilesRepository Mentors { get; }
+        IClassroomMemberRepository ClassroomMembers { get; }
+        IClassroomRepository Classrooms { get; }
 
         Task<int> SaveChangesAsync();
     }

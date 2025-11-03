@@ -1,4 +1,6 @@
-﻿using AppCore.Entities.Courses;
+﻿using AppCore.Entities.Classroom;
+using AppCore.Entities.ClassroomMember;
+using AppCore.Entities.Courses;
 using AppCore.Entities.MentorProfiles;
 using AppCore.Entities.StudentProfiles;
 using AppCore.Entities.Users;
@@ -20,13 +22,20 @@ namespace InfraStructure.UnitOfWork
         public ICourseRepository Courses { get; }
         public IStudentProfileRepository Students { get; }
         public IMentorProfilesRepository Mentors { get; }
+        public IClassroomRepository Classrooms { get; }
+        public IClassroomMemberRepository ClassroomMembers { get; }
 
-        public UnitOfWork(
+        public UnitOfWork
+            (
             AppDbContext db,
             IUserRepository userRepository,
             ICourseRepository courseRepository,
             IStudentProfileRepository studentRepository,
-            IMentorProfilesRepository mentorRepository)
+            IMentorProfilesRepository mentorRepository,
+            IClassroomRepository classroomRepository,
+            IClassroomMemberRepository classroomMemberRepository
+
+            )
         {
             _db = db;
 
@@ -34,6 +43,9 @@ namespace InfraStructure.UnitOfWork
             Courses = courseRepository;
             Students = studentRepository;
             Mentors = mentorRepository;
+            Mentors = mentorRepository;
+            Classrooms = classroomRepository;
+            ClassroomMembers = classroomMemberRepository;
         }
 
         public async Task<int> SaveChangesAsync()
