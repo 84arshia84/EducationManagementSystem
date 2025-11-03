@@ -16,11 +16,16 @@ namespace AppCore.Entities.Courses
 
 
         public string Title { get; set; }
+        public string? Description { get; set; }
+
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<MentorCourse> MentorCourses { get; set; }
         public ICollection<StudentCourse> StudentCourses { get; set; }
+
+        public ICollection<Classroom.Classroom> Classrooms { get; set; } = new List<Classroom.Classroom>();
+
     }
 
 }

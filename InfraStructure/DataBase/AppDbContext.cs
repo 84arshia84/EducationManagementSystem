@@ -1,7 +1,11 @@
-﻿using AppCore.Entities.Courses;
+﻿using AppCore.Entities.Classroom;
+using AppCore.Entities.ClassroomMember;
+using AppCore.Entities.Courses;
 using AppCore.Entities.MentorProfiles;
 using AppCore.Entities.StudentProfiles;
 using AppCore.Entities.Users;
+using InfraStructure.EntityConfig.ClassroomConfig;
+using InfraStructure.EntityConfig.ClassroomMemberConfig;
 using InfraStructure.EntityConfig.CourseConfig;
 using InfraStructure.EntityConfig.MentorProfileConfig;
 using InfraStructure.EntityConfig.StudentProfileConfig;
@@ -30,12 +34,16 @@ namespace InfraStructure.DataBase
             modelBuilder.ApplyConfiguration(new StudentProfileConfig());
             modelBuilder.ApplyConfiguration(new UserConfig());
             modelBuilder.ApplyConfiguration(new CourseConfig());
+            modelBuilder.ApplyConfiguration(new ClassroomConfig());
+            modelBuilder.ApplyConfiguration(new ClassroomMemberConfig());
 
         }
         public DbSet<User> Users { get; set; }
         public DbSet<MentorProfile> MentorProfiles { get; set; }
         public DbSet<StudentProfile> StudentProfiles { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<ClassroomMember> ClassroomMembers { get; set; }
+        public DbSet<Classroom> Classrooms { get; set; }
 
     }
 }
