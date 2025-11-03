@@ -18,7 +18,7 @@ namespace InfraStructure.EntityConfig.MentorCourseConfig
 
             builder.HasOne(mc => mc.MentorProfile)
                    .WithMany(mp => mp.MentorCourses)
-                   .HasForeignKey(mc => mc.MentorProfileId)
+                   .HasForeignKey(mc => mc.MentorUserId) // <- changed
                    .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(mc => mc.Course)
@@ -26,5 +26,6 @@ namespace InfraStructure.EntityConfig.MentorCourseConfig
                    .HasForeignKey(mc => mc.CourseId)
                    .OnDelete(DeleteBehavior.Cascade);
         }
+
     }
 }

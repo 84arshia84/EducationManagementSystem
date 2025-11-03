@@ -14,7 +14,6 @@ namespace ApplicationService.Mappers.Mentors
         {
             return new MentorReadDto
             {
-                Id = mentor.Id,
                 UserId = mentor.UserId,
                 Skills = mentor.Skills,
                 ResumeUrl = mentor.ResumeUrl,

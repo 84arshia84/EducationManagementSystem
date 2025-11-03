@@ -24,15 +24,14 @@ namespace InfraStructure.Repository.MentorProfilesRepository
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteByIdAsync(Guid Id)
+        public async Task DeleteByIdAsync(Guid userId)
         {
-            var Mentor = await _context.MentorProfiles.FindAsync(Id);
-            if (Mentor == null) return;
-            {
-                _context.MentorProfiles.Remove(Mentor);
-                await _context.SaveChangesAsync();
-            }
+            // FindAsync با مقدار کلید اصلی (UserId) کار می‌کند
+            var mentor = await _context.MentorProfiles.FindAsync(userId);
+            if (mentor == null) return;
 
+            _context.MentorProfiles.Remove(mentor);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<MentorProfile>> GetAllAsync()
@@ -40,15 +39,15 @@ namespace InfraStructure.Repository.MentorProfilesRepository
             return await _context.MentorProfiles.ToListAsync();
         }
 
-        public async Task<MentorProfile> GetByIdAsync(Guid Id)
+        public async Task<MentorProfile?> GetByIdAsync(Guid userId)
         {
-            return await _context.MentorProfiles.FirstOrDefaultAsync(x => x.Id == Id);
-
+            // می‌توان از FindAsync هم استفاده کرد؛ اینجا FirstOrDefaultAsync برای شفافیت نوشته شده
+            return await _context.MentorProfiles.FirstOrDefaultAsync(x => x.UserId == userId);
         }
 
-        public async Task UpdateAsync(MentorProfile mentorProfile, Guid id)
+        public async Task UpdateAsync(MentorProfile mentorProfile, Guid userId)
         {
-            var existing = await _context.MentorProfiles.FindAsync(id);
+            var existing = await _context.MentorProfiles.FindAsync(userId);
             if (existing == null) return;
 
             existing.Skills = mentorProfile.Skills;
@@ -58,11 +57,13 @@ namespace InfraStructure.Repository.MentorProfilesRepository
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateMentorStatusAsync(Guid id, bool IsMentorApproved)
+        public async Task UpdateMentorStatusAsync(Guid userId, bool isMentorApproved)
         {
-            var existing = await _context.MentorProfiles.FindAsync(id);
+            var existing = await _context.MentorProfiles.FindAsync(userId);
             if (existing == null) return;
-            existing.IsMentorApproved = IsMentorApproved ;
+
+            existing.IsMentorApproved = isMentorApproved;
+            await _context.SaveChangesAsync();
         }
     }
 }

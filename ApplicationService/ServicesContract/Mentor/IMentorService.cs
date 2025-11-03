@@ -10,11 +10,11 @@ namespace ApplicationService.ServicesContract.Mentor
     public interface IMentorService
     {
         Task<IEnumerable<MentorReadDto>> GetAllAsync();
-        Task<MentorReadDto?> GetByIdAsync(Guid id);
+        Task<MentorReadDto?> GetByIdAsync(Guid userId);
         Task<MentorReadDto> CreateAsync(CreateMentorDto dto);
-        Task DeleteAsync(Guid id);
-        Task UpdateAsync(Guid id, UpdateMentorDto dto);
-        Task UpdateMentorStatusAsync (Guid id, UpdateMentorStatusDto dto);
+        Task DeleteAsync(Guid userId);
+        Task UpdateAsync(Guid userId, UpdateMentorDto dto);
+        Task UpdateMentorStatusAsync (Guid userId, UpdateMentorStatusDto dto);
 
     }
 }

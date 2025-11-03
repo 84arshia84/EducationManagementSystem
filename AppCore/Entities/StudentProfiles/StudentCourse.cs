@@ -11,7 +11,7 @@ namespace AppCore.Entities.StudentProfiles
     {
         public Guid Id { get; set; }
 
-        public Guid StudentProfileId { get; set; }
+        public Guid StudentUserId { get; set; }
         public Guid CourseId { get; set; }
 
         public DateTime EnrolledAt { get; set; } = DateTime.UtcNow;

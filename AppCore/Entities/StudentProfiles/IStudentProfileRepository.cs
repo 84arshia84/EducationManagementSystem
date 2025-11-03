@@ -9,9 +9,9 @@ namespace AppCore.Entities.StudentProfiles
     public interface IStudentProfileRepository
     {
         Task<IEnumerable<StudentProfile>> GetAllAcync();
-        Task <StudentProfile> GetByIdAcync(Guid id);
-        Task DeleteByIdAcync(Guid id);
+        Task <StudentProfile> GetByIdAcync(Guid userId);
+        Task DeleteByIdAcync(Guid userId);
         Task AddAcync(StudentProfile studentProfile);
-        Task UpdateAcync(StudentProfile studentProfile, Guid id);
+        Task UpdateAcync(StudentProfile studentProfile, Guid userId);
     }
 }

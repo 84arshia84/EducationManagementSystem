@@ -25,9 +25,9 @@ namespace ApplicationService.Services.Mentor
             return mentors.Select(MentorMapper.ToDto);
         }
 
-        public async Task<MentorReadDto?> GetByIdAsync(Guid id)
+        public async Task<MentorReadDto?> GetByIdAsync(Guid userId)
         {
-            var mentor = await _uow.Mentors.GetByIdAsync(id);
+            var mentor = await _uow.Mentors.GetByIdAsync(userId);
             return mentor == null ? null : MentorMapper.ToDto(mentor);
         }
 
@@ -38,26 +38,26 @@ namespace ApplicationService.Services.Mentor
             await _uow.SaveChangesAsync();
             return MentorMapper.ToDto(entity);
         }
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid userId)
         {
-            await _uow.Mentors.DeleteByIdAsync(id);
+            await _uow.Mentors.DeleteByIdAsync(userId);
             await _uow.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Guid id, UpdateMentorDto dto)
+        public async Task UpdateAsync(Guid userId, UpdateMentorDto dto)
         {
-            var existing = await _uow.Mentors.GetByIdAsync(id);
+            var existing = await _uow.Mentors.GetByIdAsync(userId);
             if (existing == null) return;
 
             MentorMapper.UpdateEntity(existing, dto);
-            await _uow.Mentors.UpdateAsync(existing, id);
+            await _uow.Mentors.UpdateAsync(existing, userId);
             await _uow.SaveChangesAsync();
         }
 
 
-        public async Task UpdateMentorStatusAsync(Guid id, UpdateMentorStatusDto dto)
+        public async Task UpdateMentorStatusAsync(Guid userId, UpdateMentorStatusDto dto)
         {
-            var existing = await _uow.Mentors.GetByIdAsync(id);
+            var existing = await _uow.Mentors.GetByIdAsync(userId);
             if (existing == null) return;
             existing.IsMentorApproved = dto.IsMentorApproved;
             await _uow.SaveChangesAsync();

@@ -24,9 +24,9 @@ namespace EducationManagementSystem.Controllers
         }
 
         [HttpGet("GetById{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetById(Guid userId)
         {
-            var mentor = await _service.GetByIdAsync(id);
+            var mentor = await _service.GetByIdAsync(userId);
             if (mentor == null) return NotFound();
             return Ok(mentor);
         }
@@ -35,27 +35,27 @@ namespace EducationManagementSystem.Controllers
         public async Task<IActionResult> Create(CreateMentorDto dto)
         {
             var created = await _service.CreateAsync(dto);
-            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+            return CreatedAtAction(nameof(GetById), new { id = created.UserId }, created);
         }
 
         [HttpDelete("Delete{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid userId)
         {
-            await _service.DeleteAsync(id);
+            await _service.DeleteAsync(userId);
             return NoContent();
         }
 
         [HttpPut("Update{id}")]
-        public async Task<IActionResult> Update(Guid id, UpdateMentorDto dto)
+        public async Task<IActionResult> Update(Guid userId, UpdateMentorDto dto)
         {
-            await _service.UpdateAsync(id, dto);
+            await _service.UpdateAsync(userId, dto);
             return NoContent();
         }
 
         [HttpPut("UpdateMentorStatus{id}")]
-        public async Task<IActionResult> Update(Guid id, UpdateMentorStatusDto  dto)
+        public async Task<IActionResult> Update(Guid userId, UpdateMentorStatusDto  dto)
         {
-            await _service.UpdateMentorStatusAsync(id, dto);
+            await _service.UpdateMentorStatusAsync(userId, dto);
             return NoContent();
         }
 

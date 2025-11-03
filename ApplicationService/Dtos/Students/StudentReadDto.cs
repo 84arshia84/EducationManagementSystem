@@ -9,7 +9,6 @@ namespace ApplicationService.Dtos.Students
 {
     public class StudentReadDto
     {
-        public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public string? Skills { get; set; }
         public string? Languages { get; set; }

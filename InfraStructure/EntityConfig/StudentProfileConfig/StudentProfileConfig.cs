@@ -15,7 +15,9 @@ namespace InfraStructure.EntityConfig.StudentProfileConfig
         public void Configure(EntityTypeBuilder<StudentProfile> builder)
         {
             builder.ToTable("StudentProfiles");
-            builder.HasKey(x => x.Id);
+
+            // UserId becomes primary key
+            builder.HasKey(x => x.UserId);
 
             builder.Property(x => x.Skills).HasMaxLength(500);
             builder.Property(x => x.Languages).HasMaxLength(200);
@@ -25,10 +27,9 @@ namespace InfraStructure.EntityConfig.StudentProfileConfig
                    .HasForeignKey<StudentProfile>(x => x.UserId)
                    .OnDelete(DeleteBehavior.Cascade);
 
-            //  Many-to-Many با Course (از طریق StudentCourse)
             builder.HasMany(x => x.StudentCourses)
                    .WithOne(x => x.StudentProfile)
-                   .HasForeignKey(x => x.StudentProfileId)
+                   .HasForeignKey(x => x.StudentUserId)
                    .OnDelete(DeleteBehavior.Cascade);
         }
     }

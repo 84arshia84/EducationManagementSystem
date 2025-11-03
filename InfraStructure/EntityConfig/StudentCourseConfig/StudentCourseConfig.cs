@@ -18,7 +18,7 @@ namespace InfraStructure.EntityConfig.StudentCourseConfig
 
             builder.HasOne(sc => sc.StudentProfile)
                    .WithMany(sp => sp.StudentCourses)
-                   .HasForeignKey(sc => sc.StudentProfileId)
+                   .HasForeignKey(sc => sc.StudentUserId) // <- changed
                    .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(sc => sc.Course)

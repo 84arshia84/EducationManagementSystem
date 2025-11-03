@@ -8,7 +8,6 @@ namespace ApplicationService.Dtos.Mentors
 {
     public class MentorReadDto
     {
-        public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public string? Skills { get; set; }
         public string? ResumeUrl { get; set; }

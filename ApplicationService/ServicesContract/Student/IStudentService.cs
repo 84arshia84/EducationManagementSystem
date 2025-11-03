@@ -10,9 +10,9 @@ namespace ApplicationService.ServicesContract.Student
     public interface IStudentService
     {
         Task<IEnumerable<StudentReadDto>> GetAllAsync();
-        Task<StudentReadDto?> GetByIdAsync(Guid id);
+        Task<StudentReadDto?> GetByIdAsync(Guid userId);
         Task<StudentReadDto> CreateAsync(CreateStudentDto dto);
-        Task UpdateAsync(Guid id, UpdateStudentDto dto);
-        Task DeleteAsync(Guid id);
+        Task UpdateAsync(Guid userId, UpdateStudentDto dto);
+        Task DeleteAsync(Guid userId);
     }
 }

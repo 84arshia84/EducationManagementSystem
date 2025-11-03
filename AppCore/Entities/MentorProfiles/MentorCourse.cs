@@ -11,7 +11,7 @@ namespace AppCore.Entities.MentorProfiles
     {
         public Guid Id { get; set; }
 
-        public Guid MentorProfileId { get; set; }
+        public Guid MentorUserId { get; set; }
         public Guid CourseId { get; set; }
 
         public DateTime AssignedAt { get; set; } = DateTime.UtcNow;

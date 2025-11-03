@@ -24,9 +24,9 @@ namespace EducationManagementSystem.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetById(Guid userId)
         {
-            var student = await _service.GetByIdAsync(id);
+            var student = await _service.GetByIdAsync(userId);
             if (student == null) return NotFound();
             return Ok(student);
         }
@@ -35,20 +35,20 @@ namespace EducationManagementSystem.Controllers
         public async Task<IActionResult> Create(CreateStudentDto dto)
         {
             var created = await _service.CreateAsync(dto);
-            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+            return CreatedAtAction(nameof(GetById), new { id = created.UserId }, created);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, UpdateStudentDto dto)
+        public async Task<IActionResult> Update(Guid userId, UpdateStudentDto dto)
         {
-            await _service.UpdateAsync(id, dto);
+            await _service.UpdateAsync(userId, dto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid userId)
         {
-            await _service.DeleteAsync(id);
+            await _service.DeleteAsync(userId);
             return NoContent();
         }
     }

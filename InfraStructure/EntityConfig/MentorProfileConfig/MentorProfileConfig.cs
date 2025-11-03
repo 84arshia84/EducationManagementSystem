@@ -16,7 +16,9 @@ namespace InfraStructure.EntityConfig.MentorProfileConfig
         public void Configure(EntityTypeBuilder<MentorProfile> builder)
         {
             builder.ToTable("MentorProfiles");
-            builder.HasKey(x => x.Id);
+
+            // قبلاً HasKey(x => x.Id); بود — اکنون UserId کلید اصلی است:
+            builder.HasKey(x => x.UserId);
 
             builder.Property(x => x.Skills).HasMaxLength(500);
             builder.Property(x => x.ResumeUrl).HasMaxLength(500);
@@ -26,10 +28,9 @@ namespace InfraStructure.EntityConfig.MentorProfileConfig
                    .HasForeignKey<MentorProfile>(x => x.UserId)
                    .OnDelete(DeleteBehavior.Cascade);
 
-            // Many-to-Many با Course (از طریق MentorCourse)
             builder.HasMany(x => x.MentorCourses)
                    .WithOne(x => x.MentorProfile)
-                   .HasForeignKey(x => x.MentorProfileId)
+                   .HasForeignKey(x => x.MentorUserId)
                    .OnDelete(DeleteBehavior.Cascade);
         }
     }

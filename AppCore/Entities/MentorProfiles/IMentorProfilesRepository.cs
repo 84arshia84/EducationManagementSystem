@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 
 namespace AppCore.Entities.MentorProfiles
 {
-    public  interface IMentorProfilesRepository
+    public interface IMentorProfilesRepository
     {
-        Task <MentorProfile> GetByIdAsync (Guid Id);
-        Task <IEnumerable<MentorProfile>> GetAllAsync ();
+        Task<MentorProfile?> GetByIdAsync(Guid userId);
+        Task<IEnumerable<MentorProfile>> GetAllAsync();
         Task AddAsync(MentorProfile mentorProfile);
 
-        Task DeleteByIdAsync (Guid Id);
-        Task UpdateAsync(MentorProfile mentorProfile, Guid id);
-        Task UpdateMentorStatusAsync(Guid id, bool IsMentorApproved);
-
+        Task DeleteByIdAsync(Guid userId);
+        Task UpdateAsync(MentorProfile mentorProfile, Guid userId);
+        Task UpdateMentorStatusAsync(Guid userId, bool IsMentorApproved);
 
     }
 }

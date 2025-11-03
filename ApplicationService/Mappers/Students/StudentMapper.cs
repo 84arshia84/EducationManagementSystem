@@ -14,7 +14,6 @@ namespace ApplicationService.Mappers.Students
         {
             return new StudentReadDto
             {
-                Id = student.Id,
                 UserId = student.UserId,
                 Skills = student.Skills,
                 Languages = student.Languages,

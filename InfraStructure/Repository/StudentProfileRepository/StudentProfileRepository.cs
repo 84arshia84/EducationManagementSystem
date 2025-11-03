@@ -12,7 +12,6 @@ namespace InfraStructure.Repository.StudentProfileRepository
 {
     public class StudentProfileRepository : IStudentProfileRepository
     {
-
         private readonly AppDbContext _context;
 
         public StudentProfileRepository(AppDbContext context)
@@ -26,14 +25,14 @@ namespace InfraStructure.Repository.StudentProfileRepository
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteByIdAcync(Guid id)
+        // پاک کردن بر اساس UserId
+        public async Task DeleteByIdAcync(Guid userId)
         {
-            var Student = await _context.StudentProfiles.FindAsync(id);
-            if (Student == null) return;
-            {
-                _context.StudentProfiles.Remove(Student);
-                await _context.SaveChangesAsync();
-            }
+            var student = await _context.StudentProfiles.FirstOrDefaultAsync(x => x.UserId == userId);
+            if (student == null) return;
+
+            _context.StudentProfiles.Remove(student);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<StudentProfile>> GetAllAcync()
@@ -41,15 +40,16 @@ namespace InfraStructure.Repository.StudentProfileRepository
             return await _context.StudentProfiles.ToListAsync();
         }
 
-        public async Task<StudentProfile> GetByIdAcync(Guid id)
+        // بازیابی بر اساس UserId
+        public async Task<StudentProfile> GetByIdAcync(Guid userId)
         {
-            return await _context.StudentProfiles.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.StudentProfiles.FirstOrDefaultAsync(x => x.UserId == userId);
         }
 
-
-        public async Task UpdateAcync(StudentProfile studentProfile, Guid id)
+        // آپدیت بر اساس UserId
+        public async Task UpdateAcync(StudentProfile studentProfile, Guid userId)
         {
-            var existing = await _context.StudentProfiles.FindAsync(id);
+            var existing = await _context.StudentProfiles.FirstOrDefaultAsync(x => x.UserId == userId);
             if (existing == null) return;
 
             existing.Skills = studentProfile.Skills;
