@@ -38,7 +38,7 @@ namespace EducationManagementSystem.Controllers
             return CreatedAtAction(nameof(GetById), new { id = created.UserId }, created);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> Update(Guid userId, UpdateStudentDto dto)
         {
             await _service.UpdateAsync(userId, dto);

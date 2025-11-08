@@ -34,10 +34,15 @@ namespace ApplicationService.Services.ClassroomMember
         public async Task<ClassroomMemberDto> CreateAsync(CreateClassroomMemberDto dto)
         {
             var entity = ClassroomMemberMappers.ToEntity(dto);
+
             await _uow.ClassroomMembers.AddAsync(entity);
             await _uow.SaveChangesAsync();
-            return ClassroomMemberMappers.ToDto(entity);
+
+            var created = await _uow.ClassroomMembers.GetByIdAsync(entity.Id);
+
+            return ClassroomMemberMappers.ToDto(created);
         }
+
 
         public async Task UpdateAsync(Guid id, UpdateClassroomMemberDto dto)
         {

@@ -34,12 +34,18 @@ namespace InfraStructure.Repository.ClassroomRepository
 
         public async Task<IEnumerable<Classroom>> GetAllAsync()
         {
-            return await _context.Classrooms.ToListAsync();
+            return await _context.Classrooms
+                .Include(clrm => clrm.Members)
+                .ThenInclude(mem=>mem.User)
+                .Include(clrm => clrm.Mentor)
+                .Include(clrm=>clrm.Course)
+
+                .ToListAsync();
         }
 
         public async Task<Classroom> GetByIdAsync(Guid id)
         {
-           return  await   _context.Classrooms.FirstOrDefaultAsync(c => c.Id == id);
+            return await _context.Classrooms.FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task UpdateAsync(Classroom classroom, Guid id)

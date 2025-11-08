@@ -12,6 +12,9 @@ namespace ApplicationService.Mappers.ClassroomMembers
     {
         public static ClassroomMemberDto ToDto(ClassroomMember member)
         {
+            var model = new ClassroomMemberDto();
+            model.Id = member.Id;
+            model.UserId = member.UserId;
             return new ClassroomMemberDto
             {
                 Id = member.Id,

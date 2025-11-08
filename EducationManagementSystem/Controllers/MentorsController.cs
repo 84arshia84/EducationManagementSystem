@@ -45,14 +45,14 @@ namespace EducationManagementSystem.Controllers
             return NoContent();
         }
 
-        [HttpPut("Update{id}")]
+        [HttpPut("Update")]
         public async Task<IActionResult> Update(Guid userId, UpdateMentorDto dto)
         {
             await _service.UpdateAsync(userId, dto);
             return NoContent();
         }
 
-        [HttpPut("UpdateMentorStatus{id}")]
+        [HttpPut("UpdateMentorStatus")]
         public async Task<IActionResult> Update(Guid userId, UpdateMentorStatusDto  dto)
         {
             await _service.UpdateMentorStatusAsync(userId, dto);

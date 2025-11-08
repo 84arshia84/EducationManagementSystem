@@ -12,8 +12,6 @@ namespace ApplicationService.Dtos.Courses
         public string Title { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
 
-        // روابط خلاصه
-        public List<string>? MentorNames { get; set; }
-        public List<string>? StudentNames { get; set; }
+       
     }
 }

@@ -13,7 +13,6 @@ namespace ApplicationService.Dtos.Classroom
         public Guid? CourseId { get; set; }
         public Guid MentorId { get; set; }     // REQUIRED
         public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
         //public string? SharePointFolderUrl { get; set; }
     }
 }

@@ -36,7 +36,9 @@ namespace InfraStructure.Repository.MentorProfilesRepository
 
         public async Task<IEnumerable<MentorProfile>> GetAllAsync()
         {
-            return await _context.MentorProfiles.ToListAsync();
+            return await _context.MentorProfiles
+                .Include(mtr => mtr.MentorCourses)
+                .ToListAsync();
         }
 
         public async Task<MentorProfile?> GetByIdAsync(Guid userId)

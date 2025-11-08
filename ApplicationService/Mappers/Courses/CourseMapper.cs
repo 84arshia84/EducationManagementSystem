@@ -17,12 +17,7 @@ namespace ApplicationService.Mappers.Courses
                 Id = course.Id,
                 Title = course.Title, 
                 CreatedAt = course.CreatedAt,
-                MentorNames = course.MentorCourses?
-                    .Select(mc => $"{mc.MentorProfile.User.FirstName} {mc.MentorProfile.User.LastName}")
-                    .ToList(),
-                StudentNames = course.StudentCourses?
-                    .Select(sc => $"{sc.StudentProfile.User.FirstName} {sc.StudentProfile.User.LastName}")
-                    .ToList()
+               
             };
         }
 
